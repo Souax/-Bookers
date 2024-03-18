@@ -24,8 +24,8 @@ Rails.application.routes.draw do
       get 'nestjs', to: 'programming#nestjs'
       get 'jquery', to: 'programming#jquery'
       get 'rails', to: 'programming#rails'
-      post 'auth/google/callback', to: 'users#create'
-      delete 'users/:email', to: 'api/v1/users#destroy', constraints: { email: %r{[^/]+} }
+      post 'auth/:provider/callback', to: 'users#create'
+      delete 'users/:email', to: 'users#destroy', constraints: { email: %r{[^/]+} }
 
     end
   end

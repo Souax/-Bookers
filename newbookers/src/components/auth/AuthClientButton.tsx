@@ -23,7 +23,7 @@ const AuthClientButton = ({ session }: { session: Session | null }) => {
         console.error("アカウント削除に失敗しました");
       }
     } catch (error) {
-      console.log("エラーだよ..。どうしよう。", error);
+      console.log("エラーさんが来たよ！こんにちは！", error);
     }
   };
 

@@ -1,10 +1,9 @@
+"use client";
 import React from "react";
 import { useSession, signOut } from "next-auth/react";
-import { Session, getServerSession } from "next-auth";
+import { Session } from "next-auth";
 
-const Logout = async () => {
-  const session: Session | null = await getServerSession();
-
+const Logout = ({ session }: { session: Session | null }) => {
   if (session) {
     return (
       <div>
