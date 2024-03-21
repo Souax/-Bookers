@@ -7,9 +7,10 @@ import PaginationComponent from "../components/pagination/Pagination";
 
 export default async function AllBook({ params, searchParams }: any) {
   const page = searchParams.page ? searchParams.page : 1;
-  const totalDataCount = 1367;
-  const itemsPerPage = 15;
   const allbooks = await getAllBooks(page);
+  const totalDataCount = 1367;
+  const itemsPerPage = 10;
+  const baseURL = "AllBook";
 
   return (
     <>
@@ -17,11 +18,14 @@ export default async function AllBook({ params, searchParams }: any) {
         <div className={styles.book_all_title}>技術書一覧</div>
         <div className={styles.book_all_line} />
         <BookList allbooks={allbooks} />
-        <PaginationComponent
-          currentPage={page}
-          totalDataCount={totalDataCount}
-          itemsPerPage={itemsPerPage}
-        />
+        <div className="my-[3.5rem] mr-[4rem]">
+          <PaginationComponent
+            currentPage={page}
+            totalDataCount={totalDataCount}
+            itemsPerPage={itemsPerPage}
+            baseURL={baseURL}
+          />
+        </div>
       </div>
       <Tag />
       <TagFramework />

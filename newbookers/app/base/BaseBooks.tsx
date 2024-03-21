@@ -1,7 +1,8 @@
+"use client";
 import { ApiResponse } from "../../types/types";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../BookList.module.css";
 
 type BaseBookProps = {
@@ -9,9 +10,27 @@ type BaseBookProps = {
 };
 
 const BaseBooks = ({ basebooks }: BaseBookProps) => {
+  const [sortedBooks, setSortedBooks] = useState(basebooks.data);
+
+  const BooksReview = () => {
+    const sorted = [...basebooks.data].sort((a, b) => {
+      const reviewA = Number(a.params?.reviewAverage) || 0;
+      const reviewB = Number(b.params?.reviewAverage) || 0;
+      return reviewB - reviewA;
+    });
+    setSortedBooks(sorted);
+  };
+
+  useEffect(() => {
+    BooksReview();
+  }, [basebooks.data]);
+
   return (
     <div>
-      {basebooks.data.map((basebook) => (
+      <button onClick={BooksReview} className="my-4">
+        レビュー順に並び替え
+      </button>
+      {sortedBooks.map((basebook) => (
         <div
           className="flex items-center pt-[5rem] mx-[21rem]"
           key={basebook.params?.booksGenreId}
@@ -31,7 +50,10 @@ const BaseBooks = ({ basebooks }: BaseBookProps) => {
                 <div className="text-[1.4rem] pb-3">
                   {basebook.params?.title}
                 </div>
-                <div className="pb-[2.5rem]">{basebook.params?.author}</div>
+                <div className="pb-[0.5rem]">{basebook.params?.author}</div>
+                <div className="pb-[2rem]">
+                  ⭐️{basebook.params?.reviewAverage}
+                </div>
                 <div className="pb-3 text-[0.8rem]">
                   {basebook.params?.salesDate}発売/
                   {basebook.params?.publisherName}/{basebook.params?.size}

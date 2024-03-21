@@ -9,7 +9,7 @@ const HeaderClient = async () => {
     <>
       {session ? (
         // ログインしている場合、プロフィール画像を表示
-        <Link href="/profile" className="ml-5 pt-4.7">
+        <Link href="/mypage" className="ml-5 pt-4.7">
           <Image
             width={40}
             height={40}

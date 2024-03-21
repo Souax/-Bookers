@@ -1,17 +1,16 @@
-"use client";
 import React from "react";
-import { useSession, signOut } from "next-auth/react";
-import { Session } from "next-auth";
+import { getServerSession } from "next-auth";
+import authOptions from "../../src/pages/api/auth/[...nextauth]";
+import LogoutButton from "@/src/components/auth/LogoutButton";
 
-const Logout = ({ session }: { session: Session | null }) => {
-  if (session) {
-    return (
-      <div>
-        <button onClick={() => signOut()}>ログアウト</button>
-      </div>
-    );
-  }
-  return null;
+const Logout = async () => {
+  const session = await getServerSession(authOptions);
+
+  return (
+    <div>
+      <LogoutButton />
+    </div>
+  );
 };
 
 export default Logout;

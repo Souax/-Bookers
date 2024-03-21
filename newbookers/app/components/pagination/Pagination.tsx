@@ -5,6 +5,7 @@ function PaginationComponent({
   currentPage,
   totalDataCount,
   itemsPerPage,
+  baseURL,
 }: any) {
   const router = useRouter();
   const lastPageNumber = Math.ceil(totalDataCount / itemsPerPage);
@@ -15,7 +16,7 @@ function PaginationComponent({
   // 前のページへ遷移
   function handlePrevious() {
     if (currentPageNumber > 1) {
-      router.push(`/AllBooks?page=${currentPageNumber - 1}`);
+      window.location.href = `/${baseURL}?page=${currentPageNumber - 1}`;
     }
   }
 
@@ -23,21 +24,25 @@ function PaginationComponent({
   function handleNext() {
     const isNextDisabled = currentPageNumber >= lastPageNumber;
     if (!isNextDisabled) {
-      router.push(`/AllBooks?page=${currentPageNumber + 1}`);
+      window.location.href = `/${baseURL}?page=${currentPageNumber + 1}`;
     }
   }
 
   return (
-    <div className="flex justify-center mt-[5rem] text-white">
+    <div className="flex justify-center mt-[6rem] text-white">
       <button
-        className="mx-5"
+        className="mx-[3.4rem] bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg text-center"
         onClick={handlePrevious}
         disabled={isPreviousDisabled}
       >
-        前へ
+        ＜ 前のページへ
       </button>
-      <button onClick={handleNext} disabled={isNextDisabled}>
-        次へ
+      <button
+        className="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg text-center"
+        onClick={handleNext}
+        disabled={isNextDisabled}
+      >
+        次のページへ ＞
       </button>
     </div>
   );

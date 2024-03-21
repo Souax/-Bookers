@@ -1,16 +1,15 @@
 import React from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
-import { NextPage } from "next";
-import { Session, getServerSession } from "next-auth";
-import AuthClientButton from "../../src/components/auth/AuthClientButton";
+import { getServerSession } from "next-auth";
+import authOptions from "../../src/pages/api/auth/[...nextauth]";
+import LoginButton from "@/src/components/auth/LoginButton";
 
-const Login: NextPage = async () => {
-  const session: Session | null = await getServerSession();
+const Login = async () => {
+  const session = await getServerSession(authOptions);
 
   return (
-    <>
-      <AuthClientButton session={session} />
-    </>
+    <div className="py-[4rem]">
+      <LoginButton />
+    </div>
   );
 };
 

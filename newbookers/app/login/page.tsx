@@ -1,12 +1,12 @@
-import Login from "@/app/login/Login";
 import React from "react";
+import LoginPages from "./LoginPage";
 
-function LoginPage() {
+const LoginPage = () => {
   return (
     <div>
-      <Login />
+      <LoginPages />
     </div>
   );
-}
+};
 
 export default LoginPage;
