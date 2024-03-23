@@ -2,6 +2,7 @@ import { Session, getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import DropdownMenu from "../../DropDown/DropDown";
 
 const HeaderClient = async () => {
   const session: Session | null = await getServerSession();
@@ -9,7 +10,7 @@ const HeaderClient = async () => {
     <>
       {session ? (
         // ログインしている場合、プロフィール画像を表示
-        <Link href="/mypage" className="ml-5 pt-4.7">
+        <div>
           <Image
             width={40}
             height={40}
@@ -17,7 +18,8 @@ const HeaderClient = async () => {
             alt="profile"
             className="rounded-full cursor-pointer"
           />
-        </Link>
+          <DropdownMenu />
+        </div>
       ) : (
         // ログインしていない場合、ログインテキストを表示
         <Link

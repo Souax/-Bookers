@@ -13,11 +13,12 @@ const BaseBooks = ({ basebooks }: BaseBookProps) => {
   const [sortedBooks, setSortedBooks] = useState(basebooks.data);
 
   const BooksReview = () => {
-    const sorted = [...basebooks.data].sort((a, b) => {
+    const sorted = [...sortedBooks].sort((a, b) => {
       const reviewA = Number(a.params?.reviewAverage) || 0;
       const reviewB = Number(b.params?.reviewAverage) || 0;
       return reviewB - reviewA;
     });
+    console.log(sorted);
     setSortedBooks(sorted);
   };
 
@@ -27,7 +28,10 @@ const BaseBooks = ({ basebooks }: BaseBookProps) => {
 
   return (
     <div>
-      <button onClick={BooksReview} className="my-4">
+      <button
+        onClick={BooksReview}
+        className="my-4 bg-gray-500 hover:bg-gray-600 rounded"
+      >
         レビュー順に並び替え
       </button>
       {sortedBooks.map((basebook) => (
