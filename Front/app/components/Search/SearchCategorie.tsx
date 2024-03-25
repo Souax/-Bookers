@@ -1,9 +1,12 @@
 "use client";
 import { Box, Button, TextField } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { IoIosSearch } from "react-icons/io";
+import Image from "next/image";
+import Link from "next/link";
+import styles from "../../BookList.module.css";
 
 type BookItem = {
   Item: {
@@ -63,6 +66,7 @@ const SearchCategorie = ({ onSearch }: any) => {
               },
             }}
           />
+
           <div className="px-2">
             <Button
               onClick={handleSearch}
@@ -73,10 +77,54 @@ const SearchCategorie = ({ onSearch }: any) => {
             </Button>
           </div>
         </Box>
+
         <div className="results">
           {results.map((book, index) => (
-            <div key={index} className="result-item">
-              <p>{book.title}</p>
+            <div
+              className="flex items-center pt-[4.5rem] mx-[21rem]"
+              key={index}
+            >
+              <div className="flex items-center">
+                <div className="flex">
+                  <div className="pt-[0.4rem]">
+                    <Image
+                      src={book.largeImageUrl}
+                      alt={book.title}
+                      width={150}
+                      height={50}
+                      className="rounded-t-md"
+                    />
+                  </div>
+                  <div className="ml-10 text-white">
+                    <Link
+                      href={book.itemUrl}
+                      className="text-[1.4rem] hover:text-gray-400"
+                    >
+                      {book.title}
+                    </Link>
+                    <div className="pb-[0.5rem] pt-2.5">{book.author}</div>
+                    <div className="pb-2 text-[0.8rem]">
+                      {book.salesDate}発売/
+                      {book.publisherName}/{book.size}
+                    </div>
+                    <div className="pb-[2rem]">
+                      ⭐️ {book.reviewAverage} ({book.reviewCount}
+                      件)
+                    </div>
+                    <div className="text-[1.3rem]">
+                      価格: {book.itemPrice}円(税込)
+                      <Link
+                        href={book.itemUrl}
+                        className="inline-block text-center bg-red-500 text-white text-[1rem] font-bold py-[0.22rem] px-2 ml-[3.5rem] rounded hover:bg-red-600"
+                        rel="nofollow"
+                      >
+                        楽天市場で見る
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+                <div className={styles.book_bottom_line}></div>
+              </div>
             </div>
           ))}
         </div>
